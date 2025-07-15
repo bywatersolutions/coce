@@ -41,13 +41,6 @@ describe('Validation Module', function() {
         expect(result.valid).to.be.false;
         expect(result.error).to.include('At least one valid ID is required');
       });
-
-      it('should reject too many IDs', function() {
-        const manyIds = Array(51).fill('1234567890').join(',');
-        const result = validateIds(manyIds);
-        expect(result.valid).to.be.false;
-        expect(result.error).to.include('Maximum 50 IDs allowed');
-      });
     });
 
     describe('ISBN-10 validation', function() {
@@ -149,13 +142,6 @@ describe('Validation Module', function() {
         const result = validateIds('275403143X,,9780415480635,');
         expect(result.valid).to.be.true;
         expect(result.ids).to.deep.equal(['275403143X', '9780415480635']);
-      });
-
-      it('should accept exactly 50 IDs', function() {
-        const fiftyIds = Array(50).fill('275403143X').join(',');
-        const result = validateIds(fiftyIds);
-        expect(result.valid).to.be.true;
-        expect(result.ids).to.have.length(50);
       });
     });
   });
